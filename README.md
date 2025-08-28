@@ -28,7 +28,6 @@ console.log(foo);
 - [x] #739
 - [ ] Add delight to UI :tada: :shipit:
 
-
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
 
