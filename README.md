@@ -18,3 +18,12 @@ foo = 'acct123';
 
 console.log(foo);
 ```
+
+## Ensure consistent use of:
+  + let/const
+  + typescript
+  + linting
+
+
+- [x] #739
+- [ ] Add delight to UI :tada: :shipit:
