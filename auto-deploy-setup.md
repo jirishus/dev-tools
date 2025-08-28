@@ -4,7 +4,7 @@ NEW DOMAIN SETUP
 //  DROPLET SETUP:
 ////////////////////
 
-Step 1: User Script
+# Step 1: User Script
   https://github.com/jirishus/automated-setups/blob/master/Ubuntu-18.04/initial_server_setup.sh
 
 Step 2: Install Nginx
