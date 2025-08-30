@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Curator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            padding: 20px;
+            color: #1a202c;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #4a5568;
+        }
+
+        .controls {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls h2 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr 100px;
+            gap: 8px;
+            margin-bottom: 8px;
+            align-items: end;
+        }
+
+        input, select {
+            padding: 8px 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 13px;
+            background: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #3182ce;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2c5282;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-filter {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .category {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .category:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .category h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+        }
+
+        .bookmarks {
+            display: grid;
+            gap: 12px;
+        }
+
+        .bookmark {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.2s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .bookmark:hover {
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #f1f5f9;
+        }
+
+        .bookmark-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .bookmark-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .bookmark-title:hover {
+            color: #3182ce;
+        }
+
+        .bookmark-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-small {
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 4px;
+        }
+
+        .btn-danger {
+            background: #ff4757;
+            color: white;
+        }
+
+        .bookmark-description {
+            color: #4a5568;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .bookmark-url {
+            color: #3182ce;
+            font-size: 0.85rem;
+            word-break: break-all;
+        }
+
+        .import-export {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            color: #2d3748;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-number {
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #4a5568;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-filter {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .import-export {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔖 Tool Curator</h1>
+            <p>Your curated collection of web tools for development and content creation</p>
+        </div>
+
+        <div class="controls">
+            <h2>Add New Tool</h2>
+            <div class="form-row">
+                <input type="text" id="nameInput" placeholder="Tool Name" required>
+                <input type="url" id="urlInput" placeholder="https://example.com" required>
+                <select id="categoryInput">
+                    <option value="Development">🔧 Development</option>
+                    <option value="Design">🎨 Design</option>
+                    <option value="Content">📝 Content</option>
+                    <option value="Analytics">📊 Analytics</option>
+                    <option value="Productivity">⚡ Productivity</option>
+                    <option value="Testing">🧪 Testing</option>
+                    <option value="Other">📂 Other</option>
+                </select>
+                <button class="btn btn-primary" onclick="addBookmark()">Add Tool</button>
+            </div>
+            <div class="form-row">
+                <input type="text" id="descriptionInput" placeholder="Brief description (optional)" style="grid-column: 1 / -1;">
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="totalTools">0</span>
+                    <span class="stat-label">Total Tools</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="totalCategories">0</span>
+                    <span class="stat-label">Categories</span>
+                </div>
+            </div>
+
+            <div class="search-filter">
+                <input type="text" id="searchInput" placeholder="🔍 Search tools..." onkeyup="filterBookmarks()">
+                <select id="categoryFilter" onchange="filterBookmarks()">
+                    <option value="">All Categories</option>
+                </select>
+            </div>
+
+            <div class="import-export">
+                <button class="btn btn-secondary" onclick="exportData()">📤 Export Data</button>
+                <input type="file" id="fileInput" accept=".json" onchange="importData(event)">
+                <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">📥 Import Data</button>
+                <button class="btn btn-secondary" onclick="clearAllData()">🗑️ Clear All</button>
+            </div>
+        </div>
+
+        <div class="categories" id="categoriesContainer">
+            <!-- Categories will be populated here -->
+        </div>
+    </div>
+
+    <script>
+        let bookmarks = [];
+
+        // Category icons mapping
+        const categoryIcons = {
+            'Development': '🔧',
+            'Design': '🎨',
+            'Content': '📝',
+            'Analytics': '📊',
+            'Productivity': '⚡',
+            'Testing': '🧪',
+            'Other': '📂'
+        };
+
+        // Load data from memory on page load
+        window.onload = function() {
+            loadSampleData();
+            renderBookmarks();
+            updateStats();
+        };
+
+        function loadSampleData() {
+            // Sample data to get started
+        const sampleBookmarks = [
+                {id: Date.now() + 1, name: 'GitHub', url: 'https://github.com', category: 'Development', description: 'Version control and collaboration'},                
+                {id: Date.now() + 2, name: 'Figma', url: 'https://figma.com', category: 'Design', description: 'Collaborative design tool'},
+                {id: Date.now() + 3, name: 'Notion', url: 'https://notion.so', category: 'Productivity', description: 'All-in-one workspace'},
+                {id: Date.now() + 4, name: 'Google Analytics', url: 'https://analytics.google.com', category: 'Analytics', description: 'Web analytics service'},
+                {id: Date.now() + 5, name: 'Digitalocean', url: 'https://www.digitalocean.com/', category: 'Cloud', description: 'Cloud'},
+                {id: Date.now() + 6, name: 'FinancialModelingPrep', url: 'https://site.financialmodelingprep.com/', category: '3rd Party API', description: 'API for stock data'},
+                {id: Date.now() + 7, name: 'CloudFlare', url: 'https://dash.cloudflare.com/', category: 'Cloud', description: 'Cloud Security'},
+            ];
+            
+            if (bookmarks.length === 0) {
+                bookmarks = sampleBookmarks;
+            }
+        }
+
+        function addBookmark() {
+            const name = document.getElementById('nameInput').value.trim();
+            const url = document.getElementById('urlInput').value.trim();
+            const category = document.getElementById('categoryInput').value;
+            const description = document.getElementById('descriptionInput').value.trim();
+
+            if (!name || !url) {
+                alert('Please fill in both name and URL fields.');
+                return;
+            }
+
+            // Validate URL
+            try {
+                new URL(url);
+            } catch {
+                alert('Please enter a valid URL (including https://)');
+                return;
+            }
+
+            const bookmark = {
+                id: Date.now(),
+                name,
+                url,
+                category,
+                description
+            };
+
+            bookmarks.push(bookmark);
+            
+            // Clear inputs
+            document.getElementById('nameInput').value = '';
+            document.getElementById('urlInput').value = '';
+            document.getElementById('descriptionInput').value = '';
+            
+            renderBookmarks();
+            updateStats();
+        }
+
+        function removeBookmark(id) {
+            if (confirm('Are you sure you want to remove this tool?')) {
+                bookmarks = bookmarks.filter(bookmark => bookmark.id !== id);
+                renderBookmarks();
+                updateStats();
+            }
+        }
+
+        function renderBookmarks() {
+            const container = document.getElementById('categoriesContainer');
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategory = document.getElementById('categoryFilter').value;
+
+            // Filter bookmarks
+            let filteredBookmarks = bookmarks.filter(bookmark => {
+                const matchesSearch = bookmark.name.toLowerCase().includes(searchTerm) || 
+                                    bookmark.description.toLowerCase().includes(searchTerm) ||
+                                    bookmark.url.toLowerCase().includes(searchTerm);
+                const matchesCategory = !selectedCategory || bookmark.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            // Group by category
+            const categories = {};
+            filteredBookmarks.forEach(bookmark => {
+                if (!categories[bookmark.category]) {
+                    categories[bookmark.category] = [];
+                }
+                categories[bookmark.category].push(bookmark);
+            });
+
+            // Update category filter dropdown
+            updateCategoryFilter();
+
+            // Render categories
+            container.innerHTML = '';
+            Object.keys(categories).sort().forEach(categoryName => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                
+                const icon = categoryIcons[categoryName] || '📂';
+                
+                categoryDiv.innerHTML = `
+                    <h3>
+                        <span class="category-icon">${icon}</span>
+                        ${categoryName}
+                        <span style="margin-left: auto; font-size: 0.9rem; opacity: 0.8;">${categories[categoryName].length}</span>
+                    </h3>
+                    <div class="bookmarks">
+                        ${categories[categoryName].map(bookmark => `
+                            <div class="bookmark">
+                                <div class="bookmark-header">
+                                    <a href="${bookmark.url}" target="_blank" class="bookmark-title">${bookmark.name}</a>
+                                    <div class="bookmark-actions">
+                                        <button class="btn btn-danger btn-small" onclick="removeBookmark(${bookmark.id})">Remove</button>
+                                    </div>
+                                </div>
+                                ${bookmark.description ? `<div class="bookmark-description">${bookmark.description}</div>` : ''}
+                                <div class="bookmark-url">${bookmark.url}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                container.appendChild(categoryDiv);
+            });
+
+            if (Object.keys(categories).length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #4a5568; font-size: 1.2rem; padding: 40px;">No tools found. Try a different search term or add some tools!</div>';
+            }
+        }
+
+        function updateCategoryFilter() {
+            const filter = document.getElementById('categoryFilter');
+            const currentValue = filter.value;
+            
+            // Get unique categories
+            const categories = [...new Set(bookmarks.map(b => b.category))].sort();
+            
+            filter.innerHTML = '<option value="">All Categories</option>';
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = `${categoryIcons[category] || '📂'} ${category}`;
+                filter.appendChild(option);
+            });
+            
+            filter.value = currentValue;
+        }
+
+        function updateStats() {
+            document.getElementById('totalTools').textContent = bookmarks.length;
+            document.getElementById('totalCategories').textContent = new Set(bookmarks.map(b => b.category)).size;
+        }
+
+        function filterBookmarks() {
+            renderBookmarks();
+        }
+
+        function exportData() {
+            const dataStr = JSON.stringify(bookmarks, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'developer-tools-backup.json';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedBookmarks = JSON.parse(e.target.result);
+                    if (Array.isArray(importedBookmarks)) {
+                        if (confirm(`This will replace your current ${bookmarks.length} tools with ${importedBookmarks.length} imported tools. Continue?`)) {
+                            bookmarks = importedBookmarks.map((bookmark, index) => ({
+                                ...bookmark,
+                                id: bookmark.id || Date.now() + index
+                            }));
+                            renderBookmarks();
+                            updateStats();
+                            alert('Data imported successfully!');
+                        }
+                    } else {
+                        alert('Invalid file format. Please select a valid backup file.');
+                    }
+                } catch (error) {
+                    alert('Error reading file. Please make sure it\'s a valid JSON file.');
+                }
+            };
+            reader.readAsText(file);
+            
+            // Reset file input
+            event.target.value = '';
+        }
+
+        function clearAllData() {
+            if (confirm('Are you sure you want to delete all tools? This cannot be undone.')) {
+                bookmarks = [];
+                renderBookmarks();
+                updateStats();
+            }
+        }
+
+        // Handle Enter key in form inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            ['nameInput', 'urlInput', 'descriptionInput'].forEach(id => {
+                document.getElementById(id).addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        addBookmark();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
