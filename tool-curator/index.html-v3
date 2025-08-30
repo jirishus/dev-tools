@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tool Curator — Dark + FA Icons + Small Thumbs</title>
-  <!-- Font Awesome (icons) -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <title>Tool Curator — Dark</title>
   <style>
     :root{
-      --bg: #0b0f14;
-      --panel: #11161b;
-      --ink: #e5e7eb;
-      --muted: #94a3b8;
-      --line: #222a33;
-      --field: #0f1419;
-      --field-line:#2a3440;
-      --accent:#cbd5e1;
+      /* Monochrome dark theme */
+      --bg: #0b0f14;          /* app background */
+      --panel: #11161b;       /* cards/panels */
+      --ink: #e5e7eb;         /* primary text */
+      --muted: #94a3b8;       /* secondary text */
+      --line: #222a33;        /* borders/dividers */
+      --field: #0f1419;       /* input background */
+      --field-line:#2a3440;   /* input border */
+      --accent:#cbd5e1;       /* minimal, still neutral */
       --danger:#ef4444;
       --radius:10px;
     }
@@ -33,9 +32,9 @@
     .container{max-width:1100px;margin:0 auto}
 
     /* Header */
-    .header{text-align:center;margin-bottom:16px}
-    .header h1{font-size:1.6rem;font-weight:800;letter-spacing:-0.01em}
-    .header p{color:var(--muted);margin-top:6px;font-size:.95rem}
+    .header{ text-align:center; margin-bottom:16px; }
+    .header h1{ font-size:1.6rem; font-weight:800; letter-spacing:-0.01em; }
+    .header p{ color:var(--muted); margin-top:6px; font-size:.95rem; }
 
     /* Panel */
     .controls{
@@ -45,7 +44,7 @@
       padding:14px;
       margin-bottom:16px;
     }
-    .controls h2{font-size:.95rem;font-weight:700;margin-bottom:10px}
+    .controls h2{ font-size:.95rem; font-weight:700; margin-bottom:10px; }
 
     /* Form */
     .form-row{
@@ -55,7 +54,6 @@
       margin-bottom:8px;
       align-items:end;
     }
-    .form-row.image-row{grid-template-columns:1fr}
     input, select{
       padding:10px 11px;
       border:1px solid var(--field-line);
@@ -65,10 +63,10 @@
       font-size:13px;
       outline:none;
     }
-    input::placeholder{color:#6b7280}
-    input:focus, select:focus{border-color:var(--accent)}
+    input::placeholder{ color:#6b7280; }
+    input:focus, select:focus{ border-color:var(--accent); }
 
-    /* Buttons */
+    /* Buttons (flat, minimal) */
     .btn{
       padding:10px 12px;
       border-radius:8px;
@@ -79,12 +77,19 @@
       background:#0f1419;
       color:var(--ink);
     }
-    .btn:hover{background:#121821}
-    .btn-primary{background:#1a2330;border-color:#2a3440}
-    .btn-primary:hover{background:#1f2a38}
-    .btn-danger{background:#2a1214;border-color:#3a1a1d;color:#ffd7db}
-    .btn-danger:hover{background:#3a171a}
-    .btn-small{padding:6px 8px;font-size:11px;border-radius:6px}
+    .btn:hover{ background:#121821; }
+    .btn-primary{
+      background:#1a2330;
+      border-color:#2a3440;
+    }
+    .btn-primary:hover{ background:#1f2a38; }
+    .btn-danger{
+      background:#2a1214;
+      border-color:#3a1a1d;
+      color:#ffd7db;
+    }
+    .btn-danger:hover{ background:#3a171a; }
+    .btn-small{ padding:6px 8px; font-size:11px; border-radius:6px; }
 
     /* Search & Filter */
     .search-filter{
@@ -109,57 +114,45 @@
     .category h3{
       font-size:1rem;
       margin-bottom:10px;
-      display:flex;align-items:center;gap:10px;
+      display:flex; align-items:center; gap:8px;
     }
-    .category h3 i{color:var(--muted)}
-    .count{margin-left:auto;color:var(--muted);font-size:.85rem}
+    .count{ margin-left:auto; color:var(--muted); font-size:.85rem; }
 
-    .bookmarks{display:grid;gap:10px}
-
-    /* Card: compact, with small thumb */
+    .bookmarks{ display:grid; gap:8px; }
     .bookmark{
-      border:1px solid var(--line);
-      border-radius:10px;
       background:#0e1318;
+      border:1px solid var(--line);
+      border-radius:8px;
       padding:10px;
     }
     .bookmark-header{
-      display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+      display:flex; justify-content:space-between; align-items:flex-start; gap:8px;
       margin-bottom:6px;
     }
-    .title-row{
-      display:flex;align-items:center;gap:10px;min-width:0;
-    }
-    .thumb-img{
-      width:44px;height:44px;border-radius:8px;flex:0 0 44px;
-      background:#0f1620;object-fit:cover;border:1px solid var(--line);
-    }
-    .title-block{
-      display:flex;flex-direction:column;gap:2px;min-width:0;
-    }
     .bookmark-title{
-      color:var(--ink);text-decoration:none;font-weight:650;font-size:.98rem;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
+      color:var(--ink);
+      text-decoration:none;
+      font-weight:650;
+      font-size:.98rem;
     }
-    .bookmark-title:hover{text-decoration:underline}
-    .bookmark-url{color:#9aa7b6;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-
-    .bookmark-description{color:var(--muted);font-size:.9rem;margin-top:6px}
+    .bookmark-title:hover{ text-decoration:underline; }
+    .bookmark-description{ color:var(--muted); font-size:.9rem; margin-bottom:6px; }
+    .bookmark-url{ color:#9aa7b6; font-size:.82rem; word-break:break-all; }
 
     .import-export{
-      display:flex;gap:8px;align-items:center;
-      margin-top:10px;padding-top:10px;border-top:1px solid var(--line);
+      display:flex; gap:8px; align-items:center;
+      margin-top:10px; padding-top:10px; border-top:1px solid var(--line);
     }
 
     .empty{
-      text-align:center;color:var(--muted);font-size:1rem;padding:32px;
-      border:1px dashed var(--line);border-radius:12px;background:#0e1318;
+      text-align:center; color:var(--muted); font-size:1rem; padding:32px;
+      border:1px dashed var(--line); border-radius:12px; background:#0e1318;
     }
 
     @media (max-width: 900px){
-      .form-row{grid-template-columns:1fr}
-      .search-filter{grid-template-columns:1fr}
-      .categories{grid-template-columns:1fr}
+      .form-row{ grid-template-columns:1fr; }
+      .search-filter{ grid-template-columns:1fr; }
+      .categories{ grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -167,13 +160,12 @@
   <div class="container">
     <div class="header">
       <h1>🔖 Tool Curator</h1>
-      <p>Minimal, visual list of your favorite tools</p>
+      <p>Minimal, focused list of your favorite tools</p>
     </div>
 
     <div class="controls">
       <h2>Add New Tool</h2>
-
-      <!-- kept intact, plus optional Image URL -->
+      <!-- kept intact -->
       <div class="form-row">
         <input type="text" id="nameInput" placeholder="Tool Name" required>
         <input type="url" id="urlInput" placeholder="https://example.com" required>
@@ -188,9 +180,7 @@
         </select>
         <button class="btn btn-primary" onclick="addBookmark()">Add Tool</button>
       </div>
-      <div class="form-row image-row">
-        <input type="url" id="imageInput" placeholder="Image URL (optional — small thumbnail)">
-      </div>
+
       <div class="form-row">
         <input type="text" id="descriptionInput" placeholder="Brief description (optional)" style="grid-column:1 / -1;">
       </div>
@@ -216,17 +206,10 @@
   <script>
     let bookmarks = [];
 
-    /* Font Awesome category icons */
+    // Minimal icon set—kept subtle via text
     const categoryIcons = {
-      'Development': 'fa-code',
-      'Design': 'fa-pen-nib',
-      'Content': 'fa-file-lines',
-      'Analytics': 'fa-chart-line',
-      'Productivity': 'fa-bolt',
-      'Testing': 'fa-vial',
-      'Other': 'fa-folder',
-      'Cloud': 'fa-cloud',
-      '3rd Party API': 'fa-puzzle-piece'
+      'Development':'🧰', 'Design':'🎨', 'Content':'📝', 'Analytics':'📊',
+      'Productivity':'⚙️', 'Testing':'🧪', 'Other':'📂', 'Cloud':'☁️', '3rd Party API':'🧩'
     };
 
     window.onload = function(){
@@ -237,13 +220,13 @@
 
     function loadSampleData(){
       const sample = [
-        { id: Date.now()+1, name:'GitHub', url:'https://github.com', category:'Development', description:'Version control & collaboration' },
-        { id: Date.now()+2, name:'Figma', url:'https://figma.com', category:'Design', description:'Collaborative design tool' },
-        { id: Date.now()+3, name:'Notion', url:'https://notion.so', category:'Productivity', description:'All-in-one workspace' },
-        { id: Date.now()+4, name:'Google Analytics', url:'https://analytics.google.com', category:'Analytics', description:'Web analytics' },
-        { id: Date.now()+5, name:'DigitalOcean', url:'https://www.digitalocean.com/', category:'Cloud', description:'Cloud' },
-        { id: Date.now()+6, name:'FinancialModelingPrep', url:'https://site.financialmodelingprep.com/', category:'3rd Party API', description:'Stock data API' },
-        { id: Date.now()+7, name:'Cloudflare', url:'https://dash.cloudflare.com/', category:'Cloud', description:'Cloud security' }
+        { id: Date.now()+1, name:'GitHub', url:'https://github.com', category:'Development', description:'Version control & collaboration'},
+        { id: Date.now()+2, name:'Figma', url:'https://figma.com', category:'Design', description:'Collaborative design tool'},
+        { id: Date.now()+3, name:'Notion', url:'https://notion.so', category:'Productivity', description:'All-in-one workspace'},
+        { id: Date.now()+4, name:'Google Analytics', url:'https://analytics.google.com', category:'Analytics', description:'Web analytics'},
+        { id: Date.now()+5, name:'DigitalOcean', url:'https://www.digitalocean.com/', category:'Cloud', description:'Cloud'},
+        { id: Date.now()+6, name:'FinancialModelingPrep', url:'https://site.financialmodelingprep.com/', category:'3rd Party API', description:'Stock data API'},
+        { id: Date.now()+7, name:'Cloudflare', url:'https://dash.cloudflare.com/', category:'Cloud', description:'Cloud security'}
       ];
       if (bookmarks.length===0) bookmarks = sample;
     }
@@ -253,16 +236,14 @@
       const url = document.getElementById('urlInput').value.trim();
       const category = document.getElementById('categoryInput').value;
       const description = document.getElementById('descriptionInput').value.trim();
-      const image = document.getElementById('imageInput').value.trim();
 
       if(!name || !url){ alert('Please fill in both name and URL.'); return; }
       try{ new URL(url); }catch{ alert('Please enter a valid URL with https://'); return; }
 
-      bookmarks.push({ id: Date.now(), name, url, category, description, image });
+      bookmarks.push({ id: Date.now(), name, url, category, description });
       document.getElementById('nameInput').value='';
       document.getElementById('urlInput').value='';
       document.getElementById('descriptionInput').value='';
-      document.getElementById('imageInput').value='';
 
       renderBookmarks();
       updateCategoryFilter();
@@ -274,23 +255,6 @@
         renderBookmarks();
         updateCategoryFilter();
       }
-    }
-
-    function getDomain(href){
-      try { return new URL(href).hostname; } catch { return ''; }
-    }
-
-    // Build a best-guess image URL for a site (logo)
-    function guessImage(url){
-      const host = getDomain(url);
-      if(!host) return '';
-      // Use Clearbit logo, fallback to Google favicon if Clearbit doesn't have it
-      return `https://logo.clearbit.com/${host}?size=128`;
-    }
-    function fallbackFavicon(url){
-      const host = getDomain(url);
-      if(!host) return '';
-      return `https://www.google.com/s2/favicons?domain=${host}&sz=64`;
     }
 
     function renderBookmarks(){
@@ -314,33 +278,20 @@
       Object.keys(groups).sort().forEach(c=>{
         const wrap = document.createElement('div');
         wrap.className = 'category';
-        const fa = categoryIcons[c] || 'fa-folder';
+        const icon = categoryIcons[c] || '📂';
         wrap.innerHTML = `
-          <h3><i class="fa-solid ${fa}"></i> ${c} <span class="count">${groups[c].length}</span></h3>
+          <h3>${icon} ${c} <span class="count">${groups[c].length}</span></h3>
           <div class="bookmarks">
-            ${groups[c].map(b=>{
-              const src = (b.image && b.image.length>0) ? b.image : guessImage(b.url);
-              const fallback = fallbackFavicon(b.url);
-              // Use onerror to swap to favicon if Clearbit or provided image fails
-              const img = `<img class="thumb-img" src="${src}" alt="" onerror="this.onerror=null; this.src='${fallback}'">`;
-              return `
-                <div class="bookmark">
-                  <div class="bookmark-header">
-                    <div class="title-row">
-                      ${img}
-                      <div class="title-block">
-                        <a class="bookmark-title" href="${b.url}" target="_blank" rel="noopener noreferrer" title="${b.name} — ${b.url}">
-                          ${b.name}
-                        </a>
-                        <div class="bookmark-url">${b.url}</div>
-                      </div>
-                    </div>
-                    <button class="btn btn-danger btn-small" onclick="removeBookmark(${b.id})">Remove</button>
-                  </div>
-                  ${b.description ? `<div class="bookmark-description">${b.description}</div>`:''}
+            ${groups[c].map(b=>`
+              <div class="bookmark">
+                <div class="bookmark-header">
+                  <a class="bookmark-title" href="${b.url}" target="_blank" rel="noopener noreferrer">${b.name}</a>
+                  <button class="btn btn-danger btn-small" onclick="removeBookmark(${b.id})">Remove</button>
                 </div>
-              `;
-            }).join('')}
+                ${b.description ? `<div class="bookmark-description">${b.description}</div>`:''}
+                <div class="bookmark-url">${b.url}</div>
+              </div>
+            `).join('')}
           </div>`;
         container.appendChild(wrap);
       });
@@ -411,7 +362,7 @@
 
     // Enter-to-add
     document.addEventListener('DOMContentLoaded', ()=>{
-      ['nameInput','urlInput','descriptionInput','imageInput'].forEach(id=>{
+      ['nameInput','urlInput','descriptionInput'].forEach(id=>{
         const el = document.getElementById(id);
         el && el.addEventListener('keypress', e=>{
           if(e.key==='Enter') addBookmark();
