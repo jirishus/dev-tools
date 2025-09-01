@@ -10,7 +10,10 @@
 ## Step 3. Setup Server Blocks
   Refer to document above
 
-## Step 4. Setup Docker / Docker-Compose
+## Step 4. SSL setup using Let's Encrypt
+  https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+
+## Step 5. Setup Docker / Docker-Compose
   ## Install docker and docker compose
   ```
   sudo apt update
