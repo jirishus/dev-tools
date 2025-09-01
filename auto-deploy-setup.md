@@ -40,6 +40,12 @@
   > Update /etc/nginx/sites-available/yourdomain.com
 
   ```
+  location / {
+    proxy_pass http://127.0.0.1:3000;
+  }
+  ```
+
+  ```
   restart nginx: sudo systemctl nginx restart
   ```
 
